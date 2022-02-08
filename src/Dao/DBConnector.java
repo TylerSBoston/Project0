@@ -2,6 +2,7 @@ package Dao;
 
 public interface DBConnector<T> {
 	
+	String ConnectionString = "WillInputLater";
 	
 	public void add(T item);
 	

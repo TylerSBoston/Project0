@@ -2,17 +2,48 @@ package Service;
 import BasicClasses.*;
 import Dao.*;
 
-public class UserHandler {
+public class UserHandler implements MultiLayorInteractable<User> {
 
 	
-	
-	//gets 
-	public static User CreateUser(User RegisteredUser)
+	//creaters user, replaces temporary user with a DB valid user
+	public User add(User RegisteredUser)
 	{
+		try{
 		
-		
-		
-		return RegisteredUser;
+			DBUserHandler.add(RegisteredUser);
+			return DBUserHandler.GetUser(RegisteredUser.getUser(), RegisteredUser.getPassword());
+		}
+		catch(Exception e) // returns previous user on DB fail
+		{
+			return RegisteredUser;
+		}
+	}
+
+	@Override
+	public void update(User item) {
+		DBUserHandler.update(item);
+	}
+	
+
+	@Override
+	public void deactivate(int ID) {
+		DBUserHandler.deactivate(ID);
+	}
+
+	@Override
+	public User get(int ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public User get(String user, String password)
+	{
+		return DBUserHandler.GetUser(user, password);
+	}
+
+	@Override
+	public String errorText() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
