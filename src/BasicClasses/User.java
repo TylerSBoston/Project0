@@ -4,42 +4,39 @@ import java.util.*;
 
 public class User {
 	
-	enum AccountType{
+	public enum AccountType{
 		Customer,
 		Employee,
-		Admin
+		Admin,
+		User
 	}
-	// to keep track of state of user
-	public enum State{
-		login,
-		create,
-		normal,
-		none
-	}
+	// to keep track of state of user, Might not be needed with command
 	HashSet<Account> accounts = new HashSet<Account>();
 	// password only used on creating accounts
 	private String password = "";
 	private String user = "";
+	private String errorText = "";
+
+
+
+
 
 	private int userID = 0;
 	private String name = "";
 	private AccountType accountType;
-	private State state;
-	
-	// for no user logged in
-	public User()
-	{
-		state = State.none;
-	}
 	
 	// for new account if its an employee
+	public User()
+	{
+		
+	}
+	
 	public User(String user, String pass,  String  name, AccountType type)
 	{
 		this.user = user;
 		password = pass;
 		accountType = type;
 		this.name = name;
-		state = State.create;
 	}
 	// for new account
 	public User(String user, String pass,  String  name)
@@ -48,7 +45,6 @@ public class User {
 		password = pass;
 		accountType = AccountType.Customer;
 		this.name = name;
-		state = State.create;
 	}
 	
 	// for login
@@ -56,7 +52,6 @@ public class User {
 	{
 		this.user = user;
 		this.password = pass;
-		state = State.login;
 	}
 	
 	//DB pulled Account
@@ -65,7 +60,6 @@ public class User {
 		this.name = name;
 		userID = ID;
 		accountType = type;
-		state = State.normal;
 	}
 	//for creating new accounts, this will be removed and done on the DB later
 	public User(String user, String pass, String name, int ID, AccountType type)
@@ -108,10 +102,28 @@ public class User {
 	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
 	}
-	public State getState() {
-		return state;
+	public String getErrorText() {
+		return errorText;
 	}
-	 
+
+	public void setErrorText(String errorText) {
+		this.errorText = errorText;
+	}
+	public HashSet<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(HashSet<Account> accounts) {
+		this.accounts = accounts;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	
 
 }

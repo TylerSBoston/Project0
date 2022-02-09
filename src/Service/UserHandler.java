@@ -11,7 +11,9 @@ public class UserHandler implements MultiLayorInteractable<User> {
 		try{
 		
 			DBUserHandler.add(RegisteredUser);
-			return DBUserHandler.GetUser(RegisteredUser.getUser(), RegisteredUser.getPassword());
+			// for database
+			//return DBUserHandler.GetUser(RegisteredUser.getUser(), RegisteredUser.getPassword());
+			return RegisteredUser;
 		}
 		catch(Exception e) // returns previous user on DB fail
 		{

@@ -10,6 +10,7 @@ public class Account {
 	String accountNumber = "";
 	String routingNumber = "";
 	String accountName = "";
+	boolean approved;
 	
 
 	// DB ID
@@ -18,16 +19,11 @@ public class Account {
 	// To transfer error messages between layers
 	String errorText = "";
 	
-	enum Type{
+	public enum Type{
 		checkings,
 		savings,
 		student,
-		investment,
-		moneyMarket,
-		senior,
-		interest,
-		child,
-		other
+		investment
 	}
 	Type accountType;
 	
@@ -37,12 +33,14 @@ public class Account {
 		this.UserID = userID;
 		accountType = type;
 		accountName = type + " account";
+		approved = false;
 	}
 	public Account(int userID, Type type, String name)
 	{
 		this.UserID = userID;
 		accountType = type;
 		accountName = name;
+		approved = false;
 	}
 	public Account(int userID, Type type, BigDecimal deposit)
 	{
@@ -50,6 +48,7 @@ public class Account {
 		balance = deposit;
 		accountType = type;
 		accountName = type + " account";
+		approved = false;
 	}
 	public Account(int userID, Type type, BigDecimal deposit, String name)
 	{
@@ -57,6 +56,7 @@ public class Account {
 		balance = deposit;
 		accountType = type;
 		accountName = name;
+		approved = false;
 	}
 	// for existing accounts
 	public Account(int ID, String accountNumber, String routingNumber, BigDecimal amount, Type type)
@@ -66,6 +66,7 @@ public class Account {
 		this.routingNumber = routingNumber;
 		balance = amount;
 		accountType = type;
+		approved = true;
 	}
 	// for errors form DB/dao
 	public Account(String error)
